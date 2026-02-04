@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<div th:replace="~{fragments/header::header}"></div>
+<div class="container">
+    <h2>Error</h2>
+    <p th:text="${error}">Something went wrong</p>
+
+    <div class="form-link">
+        <a href="/login">Go to Login</a>
+    </div>
+</div>
+
+</body>
+</html>
