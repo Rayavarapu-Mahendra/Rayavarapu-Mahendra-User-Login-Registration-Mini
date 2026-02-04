@@ -9,16 +9,13 @@ public class AuthPageController {
     public String loginPage() {
         return "login";
     }
-
-    @GetMapping("/signup")
-    public String signupPage() {
-        return "signup";
+    
+    @GetMapping("/forgot-password")
+    public String forgetPasswordPage() {
+    	return "forgot-password";
     }
 
-    @GetMapping("/otp")
-    public String otpPage() {
-        return "otp-verify";
-    }
+
 
     @GetMapping("/dashboard")
     public String dashboard() {

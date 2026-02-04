@@ -21,8 +21,11 @@ public class SecurityConfig {
                 .requestMatchers(
                     "/login",
                     "/signup",
+                    "/saveUserDetails",
                     "/verify-otp",
                     "/otp",
+                    "/forgot-password",
+                    "/change-forget-password",
                     "/css/**",
                     "/js/**"
                 ).permitAll()
