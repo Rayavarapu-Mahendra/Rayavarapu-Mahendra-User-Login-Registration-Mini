@@ -26,6 +26,7 @@ public class SecurityConfig {
                     "/otp",
                     "/forgot-password",
                     "/change-forget-password",
+                    "/resend-otp",
                     "/css/**",
                     "/js/**"
                 ).permitAll()

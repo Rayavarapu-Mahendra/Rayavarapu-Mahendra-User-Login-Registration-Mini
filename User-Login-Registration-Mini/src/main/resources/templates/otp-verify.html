@@ -12,7 +12,7 @@
     <h2>OTP Verification</h2>
 
     <form th:action="@{/verify-otp}" method="post">
-		<input type="hidden" name="email" th:value="${param.email}">
+		<input type="hidden" name="email" th:value="${email}" />
 
 		<p th:if="${error}" th:text="${error}" style="color:red"></p>
 		
@@ -24,9 +24,10 @@
         <button type="submit">Verify OTP</button>
     </form>
 
-    <div class="form-link">
-        <a href="#">Resend OTP</a>
-    </div>
+	<form th:action="@{/resend-otp}" method="post">
+	    <input type="hidden" name="email" th:value="${email}">
+	    <button type="submit">Resend OTP</button>
+	</form>
 </div>
 
 <div th:replace="~{fragments/footer :: footer}"></div>

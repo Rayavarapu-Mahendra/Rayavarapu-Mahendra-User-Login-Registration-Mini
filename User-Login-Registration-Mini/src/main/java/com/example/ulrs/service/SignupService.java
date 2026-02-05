@@ -30,16 +30,18 @@ public class SignupService {
     		}
     
 	  public void signup(User user) {
-		  uniqueEmailMobileNumberService.uniqueEmailMobile(user.getEmail(), user.getMobileNumber());
+		  String email=user.getEmail().toLowerCase().trim();
+		  String mobile=user.getMobileNumber().trim();
+		  uniqueEmailMobileNumberService.uniqueEmailMobile(email, mobile);
+		    user.setEmail(email);
+		    user.setMobileNumber(mobile);
 		  
 		  user.setPassword(passwordEncoder.encode(user.getPassword()));
 		  user.setEnabled(false);
 		  
 		  Role userRole=roleRepository.findByName("ROLE_USER").orElseThrow(() -> new RuntimeException("ROLE_USER not found"));
-		  
 		  user.getRoles().add(userRole);
 		  userRepository.save(user);
-
 		    otpService.generateOtp(user.getEmail(), OtpPurpose.SIGNUP);
 		    	}
 		    
@@ -52,6 +54,15 @@ public class SignupService {
 	        
 		    user.setEnabled(true);
 		    userRepository.save(user);
+	 }
+	 
+	 public void resendSignupOtp(String email) {
+		 User user=userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+		    if (user.isEnabled()) {
+		        throw new RuntimeException("Account already verified");
+		    }
+
+		    otpService.resendOtp(email, OtpPurpose.SIGNUP);
 	 }
 
 }

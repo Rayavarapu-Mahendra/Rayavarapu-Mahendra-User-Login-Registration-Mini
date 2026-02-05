@@ -18,7 +18,7 @@ public class UniqueEmailMobileNumberService {
 		    throw new RuntimeException("Email already registered");
 		}
 		if(uniqueEmailMobileNumber.existsByMobileNumber(mobilenumber)) {
-			throw new RuntimeException("Email already registered");
+			throw new RuntimeException("Mobile Number already registered");
 		}
 	}
 	

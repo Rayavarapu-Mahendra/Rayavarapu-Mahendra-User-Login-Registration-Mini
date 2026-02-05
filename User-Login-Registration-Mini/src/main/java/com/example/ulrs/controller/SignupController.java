@@ -33,18 +33,21 @@ public class SignupController {
 		if(result.hasErrors()) {
 			return "signup";
 		}
-		
+
         try {
             signupService.signup(user); 
         } catch (RuntimeException ex) {
             model.addAttribute("error", ex.getMessage());
             return "signup";
         }
+
+
 		return "redirect:/otp?email=" + user.getEmail();
 	}
 	
     @GetMapping("/otp")
-    public String otpPage(User user) {
+    public String otpPage(@RequestParam String email, Model model) {
+    	model.addAttribute("email", email);
         return "otp-verify";
     }
 	
@@ -56,8 +59,21 @@ public class SignupController {
     		signupService.verifySignupOtp(email, otp);
     	}catch(RuntimeException ex) {
     		model.addAttribute("error", ex.getMessage());
+    		model.addAttribute("email", email);
     		return "otp-verify";
     	}
         return "redirect:/login";
     }
+    @PostMapping("/resend-otp")
+    public String resendOtp(@RequestParam String email, Model model) {
+    		try {
+    	        signupService.resendSignupOtp(email);
+    	        model.addAttribute("success", "OTP resent successfully");
+    		}catch(RuntimeException ex) {
+    			model.addAttribute("error", ex.getMessage());
+    		}
+    	    model.addAttribute("email", email);
+    	    return "otp-verify";
+    }
+
 }

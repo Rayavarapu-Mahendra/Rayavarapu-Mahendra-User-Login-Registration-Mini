@@ -29,13 +29,6 @@ public class AuthController {
         return "redirect:/otp?email=" + email;
     }
 
-
-
-
-
-    
-    
-
     // ✅ Verify forgot-password OTP
     @PostMapping("/verify-forgot-otp")
     public String verifyForgotOtp(@RequestParam String email,

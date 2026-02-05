@@ -11,7 +11,6 @@ import com.example.ulrs.repository.UserRepository;
 public class UserService {
     private final UserRepository userRepository;
     private final OtpService otpService;
-
     private final PasswordEncoder passwordEncoder;
     
     public UserService(UserRepository userRepository,

@@ -4,11 +4,13 @@ import java.time.LocalDateTime;
 import java.util.Random;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.ulrs.entity.OtpVerification;
 import com.example.ulrs.repository.OtpVerificationRepository;
 
 @Service
+@Transactional
 public class OtpService {
 	private final OtpVerificationRepository otpRepository;
 	
@@ -36,20 +38,17 @@ public class OtpService {
 
 	    // 🔥 Send OTP via email
 	    emailService.sendOtpEmail(email, otp);
-
 	    return otp;
 	}
 
 	
 	
 	 public boolean verifyOtp(String email, String otp, OtpPurpose purpose) {
-
 	        OtpVerification otpEntity = otpRepository
 	            .findTopByEmailAndPurposeAndVerifiedFalseOrderByCreatedAtDesc(
 	                email, purpose.name()
 	            )
 	            .orElseThrow(() -> new RuntimeException("OTP not found"));
-
 	        if (otpEntity.getExpiresAt().isBefore(LocalDateTime.now())) {
 	            throw new RuntimeException("OTP expired");
 	        }
@@ -64,6 +63,19 @@ public class OtpService {
 	        return true;
 	    }
 	 
+	 
+	 public void resendOtp(String email, OtpPurpose purpose) {
+		 otpRepository.findTopByEmailAndPurposeAndVerifiedFalseOrderByCreatedAtDesc(email, purpose.name())
+		 .ifPresent(lastOtp -> {
+			 if(lastOtp.getCreatedAt()
+					 .isAfter(LocalDateTime.now().minusSeconds(60))) {
+				 throw new RuntimeException("Pleade wait 60 seconds before requesting a new OTP");
+			 }
+		 });
+		 otpRepository.invalidatePreviousOtps(email,purpose.name());
+		 generateOtp(email, purpose);
+		 
+	 }
 
 
 	
