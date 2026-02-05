@@ -64,6 +64,7 @@ public class User extends BaseEntity{
 	@NotBlank(message="gender should not be blank")
 	private String gender;
 	
+	@Column(nullable=false)
 	@NotBlank(message="Password should not be blank")
     private String password;
 
