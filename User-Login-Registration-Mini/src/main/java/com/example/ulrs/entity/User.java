@@ -69,6 +69,10 @@ public class User extends BaseEntity{
     private String password;
 
     private boolean enabled = false;
+    
+    @Column(name = "password_reset_allowed", nullable = false)
+    private boolean passwordResetAllowed = false;
+
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -77,6 +81,8 @@ public class User extends BaseEntity{
         inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
+    
+
 
     // getters & setters
 }

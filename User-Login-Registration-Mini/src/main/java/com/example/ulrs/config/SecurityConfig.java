@@ -28,6 +28,11 @@ public class SecurityConfig {
                     "/otp",
                     "/forgot-password",
                     "/change-forget-password",
+                    "/enterotp",
+                    "/verify-forgot-otp",
+                    "/reset-user-password",
+                    "/reset-password",
+                    "/resend-forgot-otp",
                     "/resend-otp",
                     "/css/**",
                     "/js/**"

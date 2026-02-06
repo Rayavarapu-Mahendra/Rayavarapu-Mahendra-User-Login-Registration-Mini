@@ -4,15 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class AuthPageController {
-
-    
-    @GetMapping("/forgot-password")
-    public String forgetPasswordPage() {
-    	return "forgot-password";
-    }
-
-
+public class DashboardController {
 
     @GetMapping("/dashboard")
     public String dashboard() {
