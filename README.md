@@ -137,7 +137,7 @@ The system uses MySQL with normalized relational structure.
 <img src="screenshots/otp-verification.png" width="600"/>
 
 ### Reset Password
-<img src="screenshots/reset-password.png" width="600"/>
+<img src="screenshots/reset-paassword.png" width="600"/>
 
 ### Dashboard
 <img src="screenshots/dashboard.png" width="600"/>
